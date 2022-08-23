@@ -13,10 +13,7 @@ namespace RealState.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseNpgsql("Server=67.205.146.248;port=5432;Database=qa;User Id=postgres;Password=Delgado123;searchPath=dbo");
-            }
+          
         }
 
         public virtual DbSet<Step> Steps { get; set; }
