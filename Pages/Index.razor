@@ -1,0 +1,29 @@
+﻿@page "/"
+@using RealState.Context
+@using RealState.Dtos
+@using System.Net.Http.Headers
+@inject HttpClient httpClient
+<PageTitle>Index</PageTitle>
+
+
+@step.fact
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+@code{
+
+    private List<Step> steps = new List<Step>();
+    private Step step = new Step();
+    protected override async Task OnInitializedAsync()
+    {
+        httpClient.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+        step = await GetEmployees();
+    }
+
+    public async Task<Step> GetEmployees()
+    {
+        var x = await httpClient.GetFromJsonAsync<Step>("https://catfact.ninja/fact");
+        return x;
+    }
+}
+
